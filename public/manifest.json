@@ -1,0 +1,17 @@
+{
+  "name": "DREAD DYN — Premium Card Store",
+  "short_name": "DREAD DYN",
+  "description": "Premium office-style digital and physical card store with verified cards and order management.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F8FC",
+  "theme_color": "#087CF0",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

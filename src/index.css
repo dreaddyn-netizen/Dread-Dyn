@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #087CF0;
+  --color-primary-hover: #0667C8;
+  --color-primary-light: #EBF4FE;
+  --color-navy: #102544;
+  --color-navy-muted: #4A5F7D;
+  --color-bg-page: #F4F8FC;
+  --color-border: #DFEAF7;
+  --color-card-bg: #FFFFFF;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--color-bg-page);
+  color: var(--color-navy);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom subtle scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F8FC;
+}
+::-webkit-scrollbar-thumb {
+  background: #C8DDF2;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A0C4E8;
+}
+
+/* Print styling for order receipt */
+@media print {
+  body {
+    background-color: #FFFFFF !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}

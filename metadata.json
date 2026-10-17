@@ -1,0 +1,6 @@
+{
+  "name": "DREAD DYN — Premium Card Store",
+  "description": "Premium office-style digital and physical card store with verified cards, instant issuance, order management, and secure customer support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
