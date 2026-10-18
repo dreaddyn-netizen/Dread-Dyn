@@ -16,7 +16,7 @@ interface ProductContextType {
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
-const PRODUCTS_STORAGE_KEY = 'dread_dyn_products_catalog_v5';
+const PRODUCTS_STORAGE_KEY = 'dread_dyn_products_catalog_v6';
 
 export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { showToast } = useToast();
@@ -27,7 +27,7 @@ export const ProductProvider: React.FC<{ children: ReactNode }> = ({ children })
       const stored = localStorage.getItem(PRODUCTS_STORAGE_KEY);
       if (stored) {
         const parsed: CardProduct[] = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length >= 40) {
+        if (Array.isArray(parsed) && parsed.length >= 100) {
           // If stored catalog has legacy Gold/Diamond cards or lacks RuPay/Online, refresh to current INITIAL_PRODUCTS
           const hasGold = parsed.some((p) => p.tier === 'Gold' || (p.category as string[]).includes('Gold') || p.name.toLowerCase().includes('gold'));
           const hasDiamond = parsed.some((p) => p.tier === 'Diamond' || (p.category as string[]).includes('Diamond') || p.name.toLowerCase().includes('diamond'));

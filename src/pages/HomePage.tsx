@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { useProducts } from '../context/ProductContext';
 import { ProductCard } from '../components/ProductCard';
 import { OnlineCardEmblem } from '../components/OnlineCardEmblem';
-import {
-  ArrowRight,
-  ShieldCheck
-} from 'lucide-react';
+import { PromotionalOfferBanner } from '../components/PromotionalOfferBanner';
+import { ArrowRight } from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   const { products } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [showAll, setShowAll] = useState<boolean>(false);
 
   // Filter products by selected category
   const filteredProducts = products.filter((p) => {
@@ -22,7 +19,18 @@ export const HomePage: React.FC = () => {
     return true;
   });
 
-  const displayedProducts = showAll || selectedCategory !== 'All' ? filteredProducts : filteredProducts.slice(0, 8);
+  const displayedProducts = filteredProducts;
+  const firstFourProducts = displayedProducts.slice(0, 4);
+  const remainingProducts = displayedProducts.slice(4);
+
+  const handleShopNow = () => {
+    const el = document.getElementById('more-products');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      scrollToProducts();
+    }
+  };
 
   const scrollToProducts = () => {
     const el = document.getElementById('popular-products');
@@ -199,58 +207,24 @@ export const HomePage: React.FC = () => {
         </button>
       </div>
 
-      {/* 3. POPULAR PRODUCTS HEADER */}
-      <div id="popular-products" className="flex items-center justify-between pt-1 scroll-mt-24">
-        <div className="flex items-center gap-2">
-          <h2 className="text-base sm:text-lg font-extrabold text-[#102544] tracking-tight">
-            Popular Products
-          </h2>
-          <span className="text-[11px] bg-[#EBF4FE] text-[#087CF0] font-bold px-2 py-0.5 rounded-full border border-[#DFEAF7]">
-            {filteredProducts.length} Cards
-          </span>
-          {selectedCategory !== 'All' && (
-            <button
-              type="button"
-              onClick={() => setSelectedCategory('All')}
-              className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#EBF4FE] text-[#087CF0] hover:bg-blue-100 transition"
-            >
-              {selectedCategory} ✕
-            </button>
-          )}
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setShowAll(!showAll)}
-          className="text-xs sm:text-sm font-bold text-[#087CF0] hover:text-[#0667C8] flex items-center gap-1 transition"
-        >
-          <span>{showAll || selectedCategory !== 'All' ? 'Show Default' : `View All (${products.length})`}</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
-      </div>
-
-      {/* 4. PRODUCTS GRID (2 COLUMNS MATCHING THE SCREENSHOT) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        {displayedProducts.map((card) => (
+      {/* 3. FIRST 4 PRODUCT CARDS */}
+      <div id="popular-products" className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 scroll-mt-20">
+        {firstFourProducts.map((card) => (
           <ProductCard key={card.id} product={card} />
         ))}
       </div>
 
-      {/* 5. TRUST PILLARS & CONCIERGE ASSURANCE */}
-      <div className="mt-8 pt-6 border-t border-[#DFEAF7] bg-white rounded-2xl p-5 border shadow-xs space-y-3">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-[#087CF0]" />
-          <h3 className="font-extrabold text-sm text-[#102544]">DREAD DYN Official Guarantee</h3>
+      {/* 4. ATTRACTIVE PROMOTIONAL OFFER BANNER */}
+      <PromotionalOfferBanner onShopNow={handleShopNow} />
+
+      {/* 5. REMAINING PRODUCT CARDS */}
+      {remainingProducts.length > 0 && (
+        <div id="more-products" className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 scroll-mt-20">
+          {remainingProducts.map((card) => (
+            <ProductCard key={card.id} product={card} />
+          ))}
         </div>
-        <p className="text-xs text-[#4A5F7D] leading-relaxed">
-          All high-limit instruments feature hardware-encrypted HSM virtual keys, tamper-proof courier vault packs, and verified 24/7 executive support.
-        </p>
-        <div className="grid grid-cols-3 gap-2 pt-2 text-center text-[10px] font-bold text-[#102544]">
-          <div className="p-2 rounded-lg bg-[#F4F8FC] border border-[#DFEAF7]">100% Encrypted</div>
-          <div className="p-2 rounded-lg bg-[#F4F8FC] border border-[#DFEAF7]">Instant Delivery</div>
-          <div className="p-2 rounded-lg bg-[#F4F8FC] border border-[#DFEAF7]">24/7 Concierge</div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

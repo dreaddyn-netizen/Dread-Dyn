@@ -1,56 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Mail, MessageSquare, Lock, FileText, ExternalLink, CreditCard } from 'lucide-react';
+import { ShieldCheck, Mail, MessageSquare, FileText, ExternalLink } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-white border-t border-[#DFEAF7] mt-16 pb-20 lg:pb-8 text-[#102544]">
-      {/* Office Security & Assurance Band */}
-      <div className="border-b border-[#DFEAF7] bg-[#F4F8FC]/60 py-6 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-white border border-[#DFEAF7] text-[#087CF0] shadow-sm">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="font-bold text-sm">Certified Issuance</div>
-              <div className="text-xs text-[#4A5F7D] mt-0.5">High-limit corporate & personal card issuing protocols.</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-white border border-[#DFEAF7] text-[#087CF0] shadow-sm">
-              <Lock className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="font-bold text-sm">Hardware Vault Security</div>
-              <div className="text-xs text-[#4A5F7D] mt-0.5">256-bit HSM encrypted keys and physical tamper-evident seals.</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-white border border-[#DFEAF7] text-[#087CF0] shadow-sm">
-              <CreditCard className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="font-bold text-sm">Instant Digital Delivery</div>
-              <div className="text-xs text-[#4A5F7D] mt-0.5">Instant vault credentials + express courier for metal editions.</div>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="p-2.5 rounded-xl bg-white border border-[#DFEAF7] text-[#087CF0] shadow-sm">
-              <MessageSquare className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="font-bold text-sm">Executive Concierge</div>
-              <div className="text-xs text-[#4A5F7D] mt-0.5">24/7 priority ticketing & WhatsApp support desk.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="md:col-span-2 space-y-4">

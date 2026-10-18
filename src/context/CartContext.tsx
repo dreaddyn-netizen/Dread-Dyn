@@ -35,7 +35,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
       const stored = localStorage.getItem(CART_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((item): item is CartItem => !!(item && item.product && item.product.id));
+        }
+      }
+      return [];
     } catch {
       return [];
     }
@@ -44,9 +50,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [wishlist, setWishlist] = useState<string[]>(() => {
     try {
       const stored = localStorage.getItem(WISHLIST_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : ['dyn-card-001', 'dyn-card-005'];
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) return parsed.filter((id) => typeof id === 'string');
+      }
+      return ['dyn-card-001', 'dyn-card-006'];
     } catch {
-      return ['dyn-card-001', 'dyn-card-005'];
+      return ['dyn-card-001', 'dyn-card-006'];
     }
   });
 
@@ -180,8 +190,8 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return wishlist.includes(productId);
   };
 
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const itemCount = items.reduce((sum, item) => sum + (item?.quantity || 0), 0);
+  const subtotal = items.reduce((sum, item) => sum + ((item?.product?.price || 0) * (item?.quantity || 1)), 0);
   
   const discountPercent = appliedPromo && VALID_PROMO_CODES[appliedPromo]
     ? VALID_PROMO_CODES[appliedPromo].discountPercent

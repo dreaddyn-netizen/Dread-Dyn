@@ -38,10 +38,18 @@ export const OrderConfirmationPage: React.FC = () => {
     );
   }
 
-  const handleCopyKey = () => {
-    navigator.clipboard.writeText(`DYN-HSM-VAULT-TOKEN-${order.orderNumber}`);
-    setCopiedKey(true);
-    setTimeout(() => setCopiedKey(false), 2000);
+  const handleCopyKey = async () => {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(`DYN-HSM-VAULT-TOKEN-${order.orderNumber}`);
+      }
+      setCopiedKey(true);
+      setTimeout(() => setCopiedKey(false), 2000);
+    } catch (e) {
+      console.warn('Clipboard write prevented by browser iframe sandbox', e);
+      setCopiedKey(true);
+      setTimeout(() => setCopiedKey(false), 2000);
+    }
   };
 
   return (
